@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found | NeruTik</title>
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #121212;
+      color: #ccc;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .error-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .error-container h1 {
+      font-size: 3rem;
+      color: #ff0050;
+      margin: 0;
+    }
+    .error-container p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+    }
+    .error-container a {
+      background: #ff0050;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .error-container a:hover {
+      background: #e00445;
+    }
+  </style>
+</head>
+<body>
+  <main class="error-container">
+    <h1>404</h1>
+    <p>Oops! The page you're looking for doesn't exist.</p>
+    <a onclick="returnToHome(); return false;">Back to Home</a>
+  </main>
+  <script>
+    function returnToHome() {
+      const hostname = window.location.hostname;
+      const path = window.location.pathname.split('#')[0]; // Remove hash
+      const protocol = window.location.protocol; // e.g., https:
+      const domain = `${protocol}//${hostname}`;
+
+      let redirectPath = '/';
+
+      if (hostname.toLowerCase().includes('github')) {
+        const pathSegments = path.split('/').filter(segment => segment && segment !== '404');
+        if (pathSegments.length > 0) {
+          redirectPath = `/${pathSegments[0]}/`;
+        }
+      }
+
+      window.location.assign(`${domain}${redirectPath}`);
+    }
+  </script>
+</body>
+</html>
