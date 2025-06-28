@@ -1,3 +1,6 @@
+function fullReload() {
+  window.location.href = location.origin + location.pathname;
+}
 document.addEventListener("DOMContentLoaded", () => {
   const box = document.createElement("div");
   box.className = "box";
@@ -41,6 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const video = data.data;
       const title = video.title || "Untitled";
 
+      // Buat URL share
+      const shareLink = `${location.origin}${location.pathname}?share=${encodeURIComponent(url)}`;
+
       output.innerHTML = `
         <h2 class="video-header">By ${video.author.nickname}</h2>
         <video class="video-player" src="${video.play}" controls autoplay loop=false></video>
@@ -53,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </select>
             <button onclick="downloadTikTok()">Download</button>
             <button onclick="location.reload()">Get it with another video URL</button>
+            <button onclick="shareLink('${shareLink}')">Share</button>
           </div>
           <div class="data-container">
             <div class="video-title">${title}</div>
@@ -95,6 +102,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.removeChild(a);
   }
 
-  // Expose download function to global scope
+  function shareLink(link) {
+    navigator.clipboard.writeText(link)
+      .then(() => alert("✅ Share link copied to clipboard:\n" + link))
+      .catch(err => alert("❌ Failed to copy: " + err));
+  }
+
+  // Expose functions
   window.download = download;
+  window.shareLink = shareLink;
+
+  // Cek parameter `?share=`
+  const params = new URLSearchParams(window.location.search);
+  const sharedURL = params.get('share');
+  if (sharedURL) {
+    const input = document.getElementById("url");
+    if (input) input.value = sharedURL;
+    download();
+  }
 });
