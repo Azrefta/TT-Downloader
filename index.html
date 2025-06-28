@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeruTik - TikTok Downloader</title>
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="https://i.pinimg.com/736x/d1/a2/08/d1a208a239bb570bbc7cb83e2ad173f3.jpg" />
+  <link rel="stylesheet" href="s.css">
   <script src="m.js" defer></script>
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header class="navbar">
@@ -23,18 +23,10 @@
 
     <div class="input-group" id="input-group">
       <input type="text" id="url" placeholder="Paste TikTok video link here..." />
-      <button id="downloadBtn" onclick="download()" disabled>Submit</button>
+      <button id="downloadBtn" onclick="download()">Submit</button>
     </div>
 
-    <p class="hint" id="hint">Please verify CAPTCHA and paste a valid TikTok URL.</p>
-
-    <div class="turnstile-box" id="captcha-box">
-      <div class="cf-turnstile"
-           data-sitekey="0x4AAAAAABit7LP-lm7dtuNk"
-           data-callback="onTurnstileSuccess"
-           data-theme="dark">
-      </div>
-    </div>
+    <p class="hint" id="hint">Please paste a valid TikTok URL.</p>
 
     <div id="output" style="display: none;"></div>
   </main>
